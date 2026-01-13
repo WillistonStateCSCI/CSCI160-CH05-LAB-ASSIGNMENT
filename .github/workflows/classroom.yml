@@ -24,7 +24,7 @@ jobs:
           3
           5
           *
-        expected-output: three multiplied by 5 is 15
+        expected-output: three multiplied by five is 15
         comparison-method: contains
         timeout: 10
         max-score: 2
@@ -48,8 +48,8 @@ jobs:
       uses: classroom-resources/autograding-io-grader@v1
       with:
         test-name: Q05_55 Test 3
-        setup-command: javac Q05_55/EnglishCalculator
-        command: java -cp Q05_55 English Calculator
+        setup-command: javac Q05_55/EnglishCalculator.java
+        command: java -cp Q05_55 EnglishCalculator
         input: |-
           5
           2
@@ -63,7 +63,7 @@ jobs:
       uses: classroom-resources/autograding-io-grader@v1
       with:
         test-name: Q05_55 Test 4
-        setup-command: javac Q05_55/EnglishCalculator
+        setup-command: javac Q05_55/EnglishCalculator.java
         command: java -cp Q05_55 EnglishCalculator
         input: |-
           6
@@ -93,13 +93,13 @@ jobs:
       uses: classroom-resources/autograding-io-grader@v1
       with:
         test-name: Q05_55 Test 6
-        setup-command: javac Q05_55/EnglishCalculator
+        setup-command: javac Q05_55/EnglishCalculator.java
         command: java -cp Q05_55 EnglishCalculator
         input: |-
           5
           1
           &
-        expected-output: Invalid Operator
+        expected-output: Invalid operator
         comparison-method: contains
         timeout: 10
         max-score: 2
