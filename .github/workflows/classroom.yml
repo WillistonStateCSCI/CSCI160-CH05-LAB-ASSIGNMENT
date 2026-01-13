@@ -1,0 +1,132 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Q05_55 Test 1
+      id: q05_55-test-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_55 Test 1
+        setup-command: javac Q05_55/EnglishCalculator.java
+        command: java -cp Q05_55 EnglishCalculator
+        input: |-
+          3
+          5
+          *
+        expected-output: three multiplied by 5 is 15
+        comparison-method: contains
+        timeout: 10
+        max-score: 2
+    - name: Q05_55 Test 2
+      id: q05_55-test-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_55 Test 2
+        setup-command: javac Q05_55/EnglishCalculator.java
+        command: java -cp Q05_55 EnglishCalculator
+        input: |-
+          2
+          9
+          -
+        expected-output: two minus nine is -7
+        comparison-method: contains
+        timeout: 10
+        max-score: 2
+    - name: Q05_55 Test 3
+      id: q05_55-test-3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_55 Test 3
+        setup-command: javac Q05_55/EnglishCalculator
+        command: java -cp Q05_55 English Calculator
+        input: |-
+          5
+          2
+          ^
+        expected-output: five to the power two is 25
+        comparison-method: contains
+        timeout: 10
+        max-score: 2
+    - name: Q05_55 Test 4
+      id: q05_55-test-4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_55 Test 4
+        setup-command: javac Q05_55/EnglishCalculator
+        command: java -cp Q05_55 EnglishCalculator
+        input: |-
+          6
+          3
+          /
+        expected-output: six divided by three is 2
+        comparison-method: contains
+        timeout: 10
+        max-score: 2
+    - name: Q05_55 Test 5
+      id: q05_55-test-5
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_55 Test 5
+        setup-command: javac Q05_55/EnglishCalculator.java
+        command: java -cp Q05_55 EnglishCalculator
+        input: |-
+          5
+          0
+          /
+        expected-output: Division by zero is not allowed
+        comparison-method: contains
+        timeout: 10
+        max-score: 2
+    - name: Q05_55 Test 6
+      id: q05_55-test-6
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_55 Test 6
+        setup-command: javac Q05_55/EnglishCalculator
+        command: java -cp Q05_55 EnglishCalculator
+        input: |-
+          5
+          1
+          &
+        expected-output: Invalid Operator
+        comparison-method: contains
+        timeout: 10
+        max-score: 2
+    - name: Q05_55 Test 7
+      id: q05_55-test-7
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Q05_55 Test 7
+        setup-command: javac Q05_55/EnglishCalculator.java
+        command: java -cp Q05_55 EnglishCalculator
+        input: |-
+          5
+          25
+          +
+        expected-output: Invalid number
+        comparison-method: contains
+        timeout: 10
+        max-score: 2
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        Q05_55-TEST-1_RESULTS: "${{steps.q05_55-test-1.outputs.result}}"
+        Q05_55-TEST-2_RESULTS: "${{steps.q05_55-test-2.outputs.result}}"
+        Q05_55-TEST-3_RESULTS: "${{steps.q05_55-test-3.outputs.result}}"
+        Q05_55-TEST-4_RESULTS: "${{steps.q05_55-test-4.outputs.result}}"
+        Q05_55-TEST-5_RESULTS: "${{steps.q05_55-test-5.outputs.result}}"
+        Q05_55-TEST-6_RESULTS: "${{steps.q05_55-test-6.outputs.result}}"
+        Q05_55-TEST-7_RESULTS: "${{steps.q05_55-test-7.outputs.result}}"
+      with:
+        runners: q05_55-test-1,q05_55-test-2,q05_55-test-3,q05_55-test-4,q05_55-test-5,q05_55-test-6,q05_55-test-7
